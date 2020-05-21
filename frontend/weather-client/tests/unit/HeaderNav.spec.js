@@ -16,7 +16,6 @@ localVue.use(BootstrapVue)
 localVue.use(Vuex)
 
 describe('HeaderNav.vue', () => {
-
   let getters
   let actions
   let store
@@ -27,7 +26,7 @@ describe('HeaderNav.vue', () => {
     speed: 'm/s',
     humidity: '%'
   }
-  
+
   beforeEach(() => {
     actions = {
       setTemperatureUnit: jest.fn()
@@ -41,11 +40,9 @@ describe('HeaderNav.vue', () => {
     })
   })
 
-
-  it('component renders correctly', () => {    
-
-    const wrapper = mount(HeaderNav, {      
-      store, 
+  it('component renders correctly', () => {
+    const wrapper = mount(HeaderNav, {
+      store,
       localVue
     })
     expect(wrapper.element).toMatchSnapshot()
@@ -53,11 +50,11 @@ describe('HeaderNav.vue', () => {
 
   it('setTemperatureUnit action is called', () => {
     const wrapper = mount(HeaderNav, {
-      store, 
+      store,
       localVue
     })
 
-    wrapper.find('.dropdown-item').trigger('click')    
+    wrapper.find('.dropdown-item').trigger('click')
     expect(actions.setTemperatureUnit).toHaveBeenCalled()
   })
 })

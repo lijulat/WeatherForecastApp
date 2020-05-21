@@ -10,18 +10,17 @@ localVue.use(BootstrapVue)
 localVue.use(Vuex)
 
 describe('ForecastList.vue', () => {
-
   let getters
-  let store  
+  let store
 
   const mockData = [
-  {
-    forecastDate : '',
-    temperature: '',
-    weatherIconUrl: '',
-    humidity: '',
-    windSpeed: ''
-  }]
+    {
+      forecastDate: '',
+      temperature: '',
+      weatherIconUrl: '',
+      humidity: '',
+      windSpeed: ''
+    }]
 
   it('component renders correctly', () => {
     getters = {
@@ -37,8 +36,8 @@ describe('ForecastList.vue', () => {
       getters
     })
 
-    const wrapper = shallowMount(ForecastList, {      
-      store, 
+    const wrapper = shallowMount(ForecastList, {
+      store,
       localVue
     })
     expect(wrapper.element).toMatchSnapshot()
@@ -58,8 +57,8 @@ describe('ForecastList.vue', () => {
       getters
     })
 
-    const wrapper = shallowMount(ForecastList, {      
-      store, 
+    const wrapper = shallowMount(ForecastList, {
+      store,
       localVue
     })
 
@@ -81,8 +80,8 @@ describe('ForecastList.vue', () => {
       getters
     })
 
-    const wrapper = shallowMount(ForecastList, {      
-      store, 
+    const wrapper = shallowMount(ForecastList, {
+      store,
       localVue
     })
 
@@ -91,7 +90,7 @@ describe('ForecastList.vue', () => {
     expect(alert.text()).toBe('Weather forecast for the search could not be found.')
   })
 
-  it('renders error text correctly', () => {    
+  it('renders error text correctly', () => {
     getters = {
       forecastData: () => mockData
     }
@@ -105,8 +104,8 @@ describe('ForecastList.vue', () => {
       getters
     })
 
-    const wrapper = shallowMount(ForecastList, {      
-      store, 
+    const wrapper = shallowMount(ForecastList, {
+      store,
       localVue
     })
 
@@ -115,7 +114,7 @@ describe('ForecastList.vue', () => {
     expect(alert.text()).toBe('An Error occurred. Please try again.')
   })
 
-  it('renders forecast list correctly', () => {    
+  it('renders forecast list correctly', () => {
     getters = {
       forecastData: () => mockData
     }
@@ -129,8 +128,8 @@ describe('ForecastList.vue', () => {
       getters
     })
 
-    const wrapper = shallowMount(ForecastList, {      
-      store, 
+    const wrapper = shallowMount(ForecastList, {
+      store,
       localVue
     })
 
@@ -139,7 +138,5 @@ describe('ForecastList.vue', () => {
 
     const alert = wrapper.find('b-alert-stub')
     expect(alert.exists()).toBe(false)
-
   })
-
 })

@@ -18,20 +18,19 @@ localVue.use(Vuex)
 localVue.filter('date', () => 'Today')
 
 describe('HistoryTable.vue', () => {
-
   let state
   let actions
   let store
 
   const mockData = [
-  {
-    city: 'Hamburg',
-    country: 'DE',
-    temperature: '20 °C',
-    humidity: '5 %',
-    windSpeed: '8 m/s'
-  }]
-  
+    {
+      city: 'Hamburg',
+      country: 'DE',
+      temperature: '20 °C',
+      humidity: '5 %',
+      windSpeed: '8 m/s'
+    }]
+
   beforeEach(() => {
     actions = {
       setInitialHistory: jest.fn()
@@ -45,30 +44,29 @@ describe('HistoryTable.vue', () => {
     })
   })
 
-
   it('component renders correctly', () => {
-    const wrapper = mount(HistoryTable, {      
-      store, 
+    const wrapper = mount(HistoryTable, {
+      store,
       localVue
     })
     expect(wrapper.element).toMatchSnapshot()
   })
 
   it('setInitialHistory action is called', () => {
-    const wrapper = mount(HistoryTable, {
-      store, 
+    mount(HistoryTable, {
+      store,
       localVue
     })
-        
+
     expect(actions.setInitialHistory).toHaveBeenCalled()
   })
 
   it('when data is not empty table is rendered', () => {
     const wrapper = mount(HistoryTable, {
-      store, 
+      store,
       localVue
     })
-        
+
     const table = wrapper.find('table')
     expect(table.exists()).toBe(true)
 
@@ -86,15 +84,15 @@ describe('HistoryTable.vue', () => {
     })
 
     const wrapper = mount(HistoryTable, {
-      store, 
+      store,
       localVue
     })
-        
+
     const table = wrapper.find('table')
     expect(table.exists()).toBe(false)
 
     const alert = wrapper.find('.alert')
     expect(alert.exists()).toBe(true)
-    expect(alert.text()).toBe('No search history available.')    
+    expect(alert.text()).toBe('No search history available.')
   })
 })

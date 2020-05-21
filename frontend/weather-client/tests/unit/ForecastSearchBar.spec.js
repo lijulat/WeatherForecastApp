@@ -16,7 +16,6 @@ localVue.use(BootstrapVue)
 localVue.use(Vuex)
 
 describe('ForecastSearchBar.vue', () => {
-
   let getters
   let actions
   let store
@@ -27,7 +26,7 @@ describe('ForecastSearchBar.vue', () => {
     speed: 'm/s',
     humidity: '%'
   }
-  
+
   beforeEach(() => {
     actions = {
       getWeatherForecasts: jest.fn()
@@ -41,25 +40,22 @@ describe('ForecastSearchBar.vue', () => {
     })
   })
 
-
-  it('component renders correctly', () => {    
-
-    const wrapper = mount(ForecastSearchBar, {      
-      store, 
+  it('component renders correctly', () => {
+    const wrapper = mount(ForecastSearchBar, {
+      store,
       localVue
     })
     expect(wrapper.element).toMatchSnapshot()
   })
 
   it('search method is called', () => {
+    const search = jest.fn()
 
-    let search = jest.fn()
-
-    const wrapper = mount(ForecastSearchBar, {      
+    const wrapper = mount(ForecastSearchBar, {
       methods: {
         search
-      },            
-      store, 
+      },
+      store,
       localVue
     })
 
@@ -69,11 +65,11 @@ describe('ForecastSearchBar.vue', () => {
 
   it('getWeatherForecasts action is called', () => {
     const wrapper = mount(ForecastSearchBar, {
-      store, 
+      store,
       localVue
     })
 
-    wrapper.find('button').trigger('click')    
+    wrapper.find('button').trigger('click')
     expect(actions.getWeatherForecasts).toHaveBeenCalled()
   })
 })

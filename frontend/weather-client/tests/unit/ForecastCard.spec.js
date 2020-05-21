@@ -18,7 +18,6 @@ localVue.filter('round', () => '123')
 localVue.filter('date', () => 'Today')
 
 describe('ForecastCard.vue', () => {
-
   let getters
   let store
 
@@ -30,7 +29,7 @@ describe('ForecastCard.vue', () => {
   }
 
   const mockData = {
-    forecastDate : '',
+    forecastDate: '',
     temperature: '',
     weatherIconUrl: '',
     humidity: '',
@@ -48,41 +47,40 @@ describe('ForecastCard.vue', () => {
     })
   })
 
-  it('component renders correctly', () => {    
+  it('component renders correctly', () => {
     const wrapper = mount(ForecastCard, {
-      propsData: { 
+      propsData: {
         forecast: mockData
       },
-      store, 
+      store,
       localVue
     })
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('renders city country correctly', () => {    
+  it('renders city country correctly', () => {
     const wrapper = mount(ForecastCard, {
-      propsData: { 
+      propsData: {
         forecast: mockData
       },
-      store, 
+      store,
       localVue
     })
     const card = wrapper.find('.card-title')
     expect(card.exists()).toBe(true)
-    expect(card.text()).toBe("Hamburg, DE")
-  })  
+    expect(card.text()).toBe('Hamburg, DE')
+  })
 
-  it('renders date correctly', () => {    
+  it('renders date correctly', () => {
     const wrapper = mount(ForecastCard, {
-      propsData: { 
+      propsData: {
         forecast: mockData
       },
-      store, 
+      store,
       localVue
     })
     const cardSubTitle = wrapper.find('.card-subtitle')
     expect(cardSubTitle.exists()).toBe(true)
     expect(cardSubTitle.text()).toBe('Today')
   })
-
 })
