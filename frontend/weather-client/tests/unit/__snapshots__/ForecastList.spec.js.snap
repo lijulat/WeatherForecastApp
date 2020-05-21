@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ForecastList.vue component renders correctly 1`] = `
+<div
+  class="mb-3 pl-md-5 pl-lg-4 pl-xl-5"
+>
+  <div>
+    <b-card-group-stub
+      deck="true"
+      tag="div"
+    >
+      <forecast-card-stub
+        forecast="[object Object]"
+      />
+    </b-card-group-stub>
+  </div>
+</div>
+`;

@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HistoryTable.vue component renders correctly 1`] = `
+<div>
+  <div>
+    <table
+      aria-busy="false"
+      aria-colcount="6"
+      class="table b-table shadow table-bordered table-sm b-table-stacked-sm"
+      role="table"
+    >
+      <!---->
+      <!---->
+      <thead
+        class="thead-light"
+        role="rowgroup"
+      >
+        <!---->
+        <tr
+          class=""
+          role="row"
+        >
+          <th
+            aria-colindex="1"
+            class=""
+            role="columnheader"
+            scope="col"
+          >
+            #
+          </th>
+          <th
+            aria-colindex="2"
+            class=""
+            role="columnheader"
+            scope="col"
+          >
+            City
+          </th>
+          <th
+            aria-colindex="3"
+            class=""
+            role="columnheader"
+            scope="col"
+          >
+            Temperature
+          </th>
+          <th
+            aria-colindex="4"
+            class=""
+            role="columnheader"
+            scope="col"
+          >
+            Humidity
+          </th>
+          <th
+            aria-colindex="5"
+            class=""
+            role="columnheader"
+            scope="col"
+          >
+            Wind Speed
+          </th>
+          <th
+            aria-colindex="6"
+            class=""
+            role="columnheader"
+            scope="col"
+          >
+            Searched On
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        role="rowgroup"
+      >
+        <!---->
+        <tr
+          class=""
+          role="row"
+        >
+          <td
+            aria-colindex="1"
+            class=""
+            data-label="#"
+            role="cell"
+          >
+            <div>
+              
+        1
+      
+            </div>
+          </td>
+          <td
+            aria-colindex="2"
+            class=""
+            data-label="City"
+            role="cell"
+          >
+            <div>
+              
+        Hamburg, DE
+      
+            </div>
+          </td>
+          <td
+            aria-colindex="3"
+            class=""
+            data-label="Temperature"
+            role="cell"
+          >
+            <div>
+              
+        20 °C
+      
+            </div>
+          </td>
+          <td
+            aria-colindex="4"
+            class=""
+            data-label="Humidity"
+            role="cell"
+          >
+            <div>
+              
+        5 %
+      
+            </div>
+          </td>
+          <td
+            aria-colindex="5"
+            class=""
+            data-label="Wind Speed"
+            role="cell"
+          >
+            <div>
+              
+        8 m/s
+      
+            </div>
+          </td>
+          <td
+            aria-colindex="6"
+            class=""
+            data-label="Searched On"
+            role="cell"
+          >
+            <div>
+              
+        Today
+      
+            </div>
+          </td>
+        </tr>
+        <!---->
+        <!---->
+      </tbody>
+      <!---->
+    </table>
+  </div>
+</div>
+`;
