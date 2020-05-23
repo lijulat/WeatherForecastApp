@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.Infrastructure",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.Domain", "WeatherApi.Domain\WeatherApi.Domain.csproj", "{7D9C1A1F-BE74-4037-BBF3-7A5722608D3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi.Infrastructure.UnitTests", "WeatherApi.Infrastructure.UnitTests\WeatherApi.Infrastructure.UnitTests.csproj", "{99FC2FB1-416A-4836-BBFD-87968F020554}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.Infrastructure.UnitTests", "WeatherApi.Infrastructure.UnitTests\WeatherApi.Infrastructure.UnitTests.csproj", "{99FC2FB1-416A-4836-BBFD-87968F020554}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi.Core.UnitTests", "WeatherApi.Core.UnitTests\WeatherApi.Core.UnitTests.csproj", "{F887D350-E269-4E5D-837A-1C59F3A06276}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.Core.UnitTests", "WeatherApi.Core.UnitTests\WeatherApi.Core.UnitTests.csproj", "{F887D350-E269-4E5D-837A-1C59F3A06276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi.IntegrationTests", "WeatherApi.IntegrationTets\WeatherApi.IntegrationTests.csproj", "{48114EBC-D017-40A0-ADBA-C4D5AAB38F77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{F887D350-E269-4E5D-837A-1C59F3A06276}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F887D350-E269-4E5D-837A-1C59F3A06276}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F887D350-E269-4E5D-837A-1C59F3A06276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48114EBC-D017-40A0-ADBA-C4D5AAB38F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48114EBC-D017-40A0-ADBA-C4D5AAB38F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48114EBC-D017-40A0-ADBA-C4D5AAB38F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48114EBC-D017-40A0-ADBA-C4D5AAB38F77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

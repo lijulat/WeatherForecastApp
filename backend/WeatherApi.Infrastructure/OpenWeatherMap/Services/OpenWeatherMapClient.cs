@@ -21,7 +21,7 @@ namespace WeatherApi.Infrastructure.OpenWeatherMap.Services
         {
             _client = client;
             _config = config;
-    }
+        }
 
         public async Task<WeatherForecastResponse> GetForecastByZipcode(string zipcode, string country, string unit)
         {
