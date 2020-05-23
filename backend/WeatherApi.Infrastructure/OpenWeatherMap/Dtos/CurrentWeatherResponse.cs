@@ -8,7 +8,7 @@ namespace WeatherApi.Infrastructure.OpenWeatherMap.Dtos
     public class CurrentWeatherResponse
     {
         [JsonPropertyName("cod")]
-        public string Code { get; set; }
+        public int Code { get; set; }
 
         [JsonPropertyName("id")]
         public int Id { get; set; }

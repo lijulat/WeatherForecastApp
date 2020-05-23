@@ -1,17 +1,23 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace WeatherApi.Domain.WeatherForecasts
 {
     public class ForecastDetails
     {
+        [JsonPropertyName("forecastDate")]
         public DateTime ForecastDate { get; set; }
 
-        public float Temperature { get; set; }
+        [JsonPropertyName("temperature")]
+        public double Temperature { get; set; }
 
-        public float Humidity { get; set; }
+        [JsonPropertyName("humidity")]
+        public double Humidity { get; set; }
 
-        public float WindSpeed { get; set; }
+        [JsonPropertyName("windSpeed")]
+        public double WindSpeed { get; set; }
 
+        [JsonPropertyName("weatherIconUrl")]
         public string WeatherIconUrl { get; set; }
     }
 }

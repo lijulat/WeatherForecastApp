@@ -15,8 +15,20 @@ namespace WeatherApi.Core.WeatherForecasts.Handlers
     public class GetForecastByCityHandler : IRequestHandler<GetForecastByCityQuery, WeatherForecast>
     {
         private readonly IForecastService _forecastService;
-        public GetForecastByCityHandler(IForecastService forecastService) => _forecastService = forecastService;
+
+        private readonly IWeatherForecastClient _weatherClient;
+        public GetForecastByCityHandler(IForecastService forecastService, IWeatherForecastClient weatherClient)
+        {
+            _forecastService = forecastService;
+            _weatherClient = weatherClient;
+        }
+
         public async Task<WeatherForecast> Handle(GetForecastByCityQuery request, CancellationToken cancellationToken)
-                                                    => await _forecastService.GetForecastByCity(request.City, request.Country, request.Unit);
+                                                    => await _forecastService.GetForecast(_weatherClient.GetForecastByCity,
+                                                                                          _weatherClient.GetCurrentWeatherByCity,
+                                                                                           request.City,
+                                                                                           request.Country,
+                                                                                           request.Unit
+                                                                                         );
     }
 }

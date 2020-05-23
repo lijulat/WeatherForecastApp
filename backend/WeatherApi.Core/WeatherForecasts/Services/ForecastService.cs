@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,38 +16,58 @@ namespace WeatherApi.Core.WeatherForecasts.Services
 {
     public class ForecastService : IForecastService
     {
-        private readonly IWeatherForecastClient _weatherClient;
-
+        
+        private readonly IMapper _mapper;
         private readonly OpenWeatherMapConfig _config;
-        public ForecastService(IWeatherForecastClient weatherClient, OpenWeatherMapConfig config)
+        public ForecastService(OpenWeatherMapConfig config, IMapper mapper)
         {
-            _weatherClient = weatherClient;
             _config = config;
+            _mapper = mapper;
         }
 
-        public async Task<WeatherForecast> GetForecastByCity(string city, string country, string unit)
-                                                => await GetForecast(_weatherClient.GetForecastByCity, _weatherClient.GetCurrentWeatherByCity, city, country, unit);
-
-        public async Task<WeatherForecast> GetForecastByZipcode(string zipcode, string country, string unit)
-                                                => await GetForecast(_weatherClient.GetForecastByZipcode, _weatherClient.GetCurrentWeatherByZipcode, zipcode, country, unit);
-
         public async Task<WeatherForecast> GetForecast(Func<string, string, string, Task<WeatherForecastResponse>> forecastFunc,
-                                                                Func<string, string, string, Task<CurrentWeatherResponse>> currentWeatherFunc, string query, string country, string unit)
+                                                       Func<string, string, string, Task<CurrentWeatherResponse>> currentWeatherFunc, 
+                                                       string query, 
+                                                       string country, 
+                                                       string unit)
         {
             var weatherForecastResponse = await forecastFunc(query, country, unit);
 
-            var forecast = weatherForecastResponse?.ToWeatherForecast(_config);
+            if (weatherForecastResponse is null) return null;
 
-            if (forecast?.DailyForecasts.Count < 6)
+            var forecast = _mapper.Map<WeatherForecast>(weatherForecastResponse);
+
+            if (forecast is null) return null;
+
+            var currentWeatherResponse = await currentWeatherFunc(query, country, unit);
+
+            if (currentWeatherResponse is CurrentWeatherResponse)
             {
-                var currentWeatherResponse = await currentWeatherFunc(query, country, unit);
-
-                if (currentWeatherResponse.DateUnixFormat.ToDateTime().IsTodaysDate() && currentWeatherResponse is object)
+                var currentForecast = _mapper.Map<ForecastDetails>(currentWeatherResponse);
+                if( currentForecast is ForecastDetails)
                 {
-                    forecast.DailyForecasts.Insert(0, currentWeatherResponse.ToWeatherForecast(_config));
+                    forecast.DailyForecasts?.Insert(0, currentForecast);
                 }
+                
             }
-            return forecast;
+
+            if (forecast.DailyForecasts.Count is int count && count == 0) return null;
+
+            // transform into average
+            return new WeatherForecast
+            {
+                City = forecast.City,
+                Country = forecast.Country,
+                DailyForecasts = forecast.DailyForecasts?.GroupBy(group => group.ForecastDate)
+                                                        .Select(group => new ForecastDetails()
+                                                        {
+                                                            ForecastDate = group.Key,
+                                                            Temperature = group.Average(forecast => forecast.Temperature),
+                                                            Humidity = group.Average(forecast => forecast.Humidity),
+                                                            WindSpeed = group.Average(forecast => forecast.WindSpeed),
+                                                            WeatherIconUrl = string.Format(_config.IconUrl, group.FirstOrDefault()?.WeatherIconUrl)
+                                                        }).ToList()
+            };            
         }
     }
 }

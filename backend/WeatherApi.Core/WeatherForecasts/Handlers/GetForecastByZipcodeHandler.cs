@@ -15,8 +15,20 @@ namespace WeatherApi.Core.WeatherForecasts.Handlers
     public class GetForecastByZipcodeHandler : IRequestHandler<GetForecastByZipQuery, WeatherForecast>
     {
         private readonly IForecastService _forecastService;
-        public GetForecastByZipcodeHandler(IForecastService forecastService) => _forecastService = forecastService;
+
+        private readonly IWeatherForecastClient _weatherClient;
+
+        public GetForecastByZipcodeHandler(IForecastService forecastService, IWeatherForecastClient weatherClient)
+        {
+            _forecastService = forecastService;
+            _weatherClient = weatherClient;
+        }
         public async Task<WeatherForecast> Handle(GetForecastByZipQuery request, CancellationToken cancellationToken)
-                                                    => await _forecastService.GetForecastByZipcode(request.Zipcode, request.Country, request.Unit);
+                                                    => await _forecastService.GetForecast(_weatherClient.GetForecastByZipcode,
+                                                                                          _weatherClient.GetCurrentWeatherByCity,
+                                                                                           request.Zipcode,
+                                                                                           request.Country,
+                                                                                           request.Unit
+                                                                                         );
     }
 }

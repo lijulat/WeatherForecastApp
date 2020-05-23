@@ -5,16 +5,16 @@ namespace WeatherApi.Infrastructure.OpenWeatherMap.Dtos
     public class WeatherCondition
     {
         [JsonPropertyName("temp")]
-        public float Temperature { get; set; }
+        public double Temperature { get; set; }
 
         [JsonPropertyName("feels_like")]
-        public float FeelsLike { get; set; }
+        public double FeelsLike { get; set; }
 
         [JsonPropertyName("temp_min")]
-        public float MinTemp { get; set; }
+        public double MinTemp { get; set; }
 
         [JsonPropertyName("temp_max")]
-        public float MaxTemp { get; set; }
+        public double MaxTemp { get; set; }
 
         [JsonPropertyName("pressure")]
         public int Pressure { get; set; }
@@ -26,10 +26,10 @@ namespace WeatherApi.Infrastructure.OpenWeatherMap.Dtos
         public int GroundLevel { get; set; }
 
         [JsonPropertyName("humidity")]
-        public float Humidity { get; set; }
+        public int Humidity { get; set; }
 
         [JsonPropertyName("temp_kf")]
-        public float InternalParam { get; set; }
+        public double InternalParam { get; set; }
     }
 
 }
