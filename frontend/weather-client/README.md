@@ -4,6 +4,11 @@
 ```
 npm install
 ```
+### Configurations
+
+All configurable values are stored in `src/common/config.js` file.
+
+- Generally, you only need to edit `API_BASE_URL` (base URL of the backend API). Can be set via env variables as well.
 
 ### Compiles and hot-reloads for development
 ```

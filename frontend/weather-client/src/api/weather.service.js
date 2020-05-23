@@ -13,9 +13,9 @@ export const WeatherService = {
   },
 
   getForecast (searchString, unit) {
-    var alphabetRegex = /[^a-zA-Z]/
-
-    if (!alphabetRegex.test(searchString)) {
+    const alphabetRegex = /^[a-z][a-z\s]*$/
+    // check of search string has only alphabets and spaces
+    if (alphabetRegex.test(searchString)) {
       return this.getForecastByCity(searchString, unit)
     } else {
       return this.getForecastByZip(searchString, unit)
