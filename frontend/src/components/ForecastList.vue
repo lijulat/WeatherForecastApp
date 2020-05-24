@@ -7,7 +7,10 @@
       <div v-if="status === 'NO_DATA_FOUND'">
         <b-alert variant="warning" show>Weather forecast for the search could not be found.</b-alert>
       </div>
-      <div v-else-if="status === 'ERROR'">
+      <div v-else-if="status === 'EMPTY_SEARCH_PARAM'">
+        <b-alert variant="danger" show>City or zipcode must be entered.</b-alert>
+      </div>
+      <div v-else-if="status === 'API_ERROR'">
         <b-alert variant="danger" show>An Error occurred. Please try again.</b-alert>
       </div>
       <b-card-group v-else deck>
@@ -19,16 +22,21 @@
 
 <script>
 import ForecastCard from './ForecastCard.vue'
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapActions } from 'vuex'
 export default {
   name: 'ForecastList',
   components: {
     ForecastCard
   },
-
+  beforeMount () {
+    this.setInitialStatus()
+  },
   computed: {
     ...mapState(['status']),
     ...mapGetters(['forecastData'])
+  },
+  methods: {
+    ...mapActions(['setInitialStatus'])
   }
 }
 </script>

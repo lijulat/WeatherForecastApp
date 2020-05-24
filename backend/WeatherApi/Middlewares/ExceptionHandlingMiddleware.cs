@@ -38,11 +38,23 @@ namespace WeatherApi.Middlewares
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             var code = HttpStatusCode.InternalServerError;
+            var message = string.Empty;
 
-            if (exception is ValidationException)
+            switch (exception)
             {
-                code = HttpStatusCode.BadRequest;                
-            }
+                case ValidationException validationException:
+                    code = HttpStatusCode.BadRequest;
+                    message = exception.Message;
+                    break;
+                case UnauthorizedAccessException unauthorizedAccessException:
+                    code = HttpStatusCode.Unauthorized;
+                    message = "Unauthorized";
+                    break;
+                default:
+                    code = HttpStatusCode.InternalServerError;
+                    message = "Internal Server Error.";
+                    break;
+            }           
 
 
             context.Response.ContentType = "application/json";
@@ -50,7 +62,7 @@ namespace WeatherApi.Middlewares
             return context.Response.WriteAsync(JsonSerializer.Serialize(new
             {
                 context.Response.StatusCode,
-                Message = code == HttpStatusCode.BadRequest ? exception.Message : "Internal Server Error."
+                Message = message
             }));
         }
     }

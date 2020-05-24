@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -67,6 +69,11 @@ namespace WeatherApi.Infrastructure.OpenWeatherMap.Services
             {
                 var contentStream = await httpResponse.Content.ReadAsStreamAsync();
                 return await JsonSerializer.DeserializeAsync<T>(contentStream);               
+            }
+
+            if (httpResponse.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException();
             }
 
             return null;           

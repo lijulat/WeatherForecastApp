@@ -14,13 +14,17 @@ describe('ForecastList.vue', () => {
   let store
 
   const mockData = [
-    {
-      forecastDate: '',
-      temperature: '',
-      weatherIconUrl: '',
-      humidity: '',
-      windSpeed: ''
-    }]
+  {
+    forecastDate: '',
+    temperature: '',
+    weatherIconUrl: '',
+    humidity: '',
+    windSpeed: ''
+  }]
+
+  let actions = {
+    setInitialStatus: jest.fn()
+  }
 
   it('component renders correctly', () => {
     getters = {
@@ -33,7 +37,8 @@ describe('ForecastList.vue', () => {
 
     store = new Vuex.Store({
       state,
-      getters
+      getters,
+      actions
     })
 
     const wrapper = shallowMount(ForecastList, {
@@ -54,7 +59,8 @@ describe('ForecastList.vue', () => {
 
     store = new Vuex.Store({
       state,
-      getters
+      getters,
+      actions
     })
 
     const wrapper = shallowMount(ForecastList, {
@@ -77,7 +83,8 @@ describe('ForecastList.vue', () => {
 
     store = new Vuex.Store({
       state,
-      getters
+      getters,
+      actions
     })
 
     const wrapper = shallowMount(ForecastList, {
@@ -90,18 +97,19 @@ describe('ForecastList.vue', () => {
     expect(alert.text()).toBe('Weather forecast for the search could not be found.')
   })
 
-  it('renders error text correctly', () => {
+  it('renders api error text correctly', () => {
     getters = {
       forecastData: () => mockData
     }
 
     const state = {
-      status: 'ERROR'
+      status: 'API_ERROR'
     }
 
     store = new Vuex.Store({
       state,
-      getters
+      getters,
+      actions
     })
 
     const wrapper = shallowMount(ForecastList, {
@@ -112,6 +120,31 @@ describe('ForecastList.vue', () => {
     const alert = wrapper.find('b-alert-stub')
     expect(alert.exists()).toBe(true)
     expect(alert.text()).toBe('An Error occurred. Please try again.')
+  })
+
+  it('renders empty search param error text correctly', () => {
+    getters = {
+      forecastData: () => mockData
+    }
+
+    const state = {
+      status: 'EMPTY_SEARCH_PARAM'
+    }
+
+    store = new Vuex.Store({
+      state,
+      getters,
+      actions
+    })
+
+    const wrapper = shallowMount(ForecastList, {
+      store,
+      localVue
+    })
+
+    const alert = wrapper.find('b-alert-stub')
+    expect(alert.exists()).toBe(true)
+    expect(alert.text()).toBe('City or zipcode must be entered.')
   })
 
   it('renders forecast list correctly', () => {
@@ -125,7 +158,8 @@ describe('ForecastList.vue', () => {
 
     store = new Vuex.Store({
       state,
-      getters
+      getters,
+      actions
     })
 
     const wrapper = shallowMount(ForecastList, {

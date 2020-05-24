@@ -23,8 +23,8 @@ The following open weather map api parameters can be set in config files:
 
 - Install dependencies `dotnet restore`
 - Build the app `dotnet build`
-- Run the app `dotnet run`
-- App is running at `https://localhost:44337/`
-- Swagger can be acccessed at `https://localhost:44337/swagger/index.html`
+- Run the app from the WeatherApi folder `dotnet run`
+- App is running at `https://localhost:<PORT_NO>/`
+- Swagger can be acccessed at `https://localhost:<PORT_NO>/swagger/index.html`
 
 

@@ -25,20 +25,29 @@ export const setInitialHistory = ({ commit }) => {
   commit('SET_HISTORY', searchHistory)
 }
 
+export const setInitialStatus = ({ commit }) => {
+  commit('SET_STATUS', '')
+}
+
 export const getWeatherForecasts = ({ commit, dispatch }, { searchString, unit }) => {
-  commit('SET_STATUS', 'LOADING')
-  return WeatherService.getForecast(searchString, unit.value)
-    .then(({ data }) => {
-      if (data) {
-        commit('SET_FORECAST_INFO', data)
-        commit('SET_STATUS', '')
-        dispatch('addHistory', { data, unit })
-      } else {
-        commit('SET_FORECAST_INFO', {})
-        commit('SET_STATUS', 'NO_DATA_FOUND')
-      }
-    })
-    .catch(() => {
-      commit('SET_STATUS', 'ERROR')
-    })
+  if (!searchString.trim()) {
+    commit('SET_STATUS', 'EMPTY_SEARCH_PARAM')
+    commit('SET_FORECAST_INFO', {})
+  } else {
+    commit('SET_STATUS', 'LOADING')
+    return WeatherService.getForecast(searchString, unit.value)
+      .then(({ data }) => {
+        if (data) {
+          commit('SET_FORECAST_INFO', data)
+          commit('SET_STATUS', '')
+          dispatch('addHistory', { data, unit })
+        } else {
+          commit('SET_FORECAST_INFO', {})
+          commit('SET_STATUS', 'NO_DATA_FOUND')
+        }
+      })
+      .catch(() => {
+        commit('SET_STATUS', 'API_ERROR')
+      })
+  }
 }

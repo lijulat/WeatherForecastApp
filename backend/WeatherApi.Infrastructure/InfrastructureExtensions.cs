@@ -23,9 +23,7 @@ namespace WeatherApi.Infrastructure
 
             services.AddHttpClient<IWeatherForecastClient, OpenWeatherMapClient>()
                 .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(openWeatherMapConfig.TimoutSeconds)))
-                .AddTransientHttpErrorPolicy(p => p.RetryAsync(openWeatherMapConfig.RetryCount, (response, count) => {
-                    response.Result.Dispose();
-                }));
+                .AddTransientHttpErrorPolicy(p => p.RetryAsync(openWeatherMapConfig.RetryCount));
 
             return services;
         }
