@@ -1,4 +1,4 @@
-# weather-client
+# Weather App Frontend Client
 
 ## Project setup
 ```
